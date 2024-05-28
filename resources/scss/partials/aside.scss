@@ -1,0 +1,21 @@
+aside{
+    background-color: violet;
+    width: 180px;
+    position: fixed;
+    left: 0;
+    top: 55px;
+    z-index: 999;
+
+    ul{
+        list-style: none;
+        padding-left: 12px !important;
+        li{
+            line-height: 40px;
+            padding: 10px 0;
+            a{
+                text-decoration: none;
+                color: white !important;
+            }
+        }
+    }
+}

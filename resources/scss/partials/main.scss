@@ -1,0 +1,27 @@
+main{
+    margin-top: 55px;
+    section{
+        margin-left: 180px;
+        .card{
+            max-height: 470px;
+            overflow-y: auto  ;
+        }
+        .brd-no{
+            border: none !important;
+            &:focus{
+                box-shadow: none !important;
+            }
+        }
+
+    }
+
+    .sec-index{
+        input,
+        textarea{
+            border: none !important;
+            &:focus{
+                box-shadow: none !important;
+            }
+        }
+    }
+}
