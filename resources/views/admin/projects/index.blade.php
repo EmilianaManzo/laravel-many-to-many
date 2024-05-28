@@ -58,6 +58,7 @@
             <th scope="col"> <a href="{{route('admin.orderby', ['direction'=> $direction , 'column'=> 'title'])}}">Title</a></th>
             <th scope="col">Link</th>
             <th scope="col">Tipo</th>
+            <th scope="col">Tecnologie</th>
             <th scope="col">Descrizione</th>
             <th scope="col"><a href="{{route('admin.orderby', ['direction'=> $direction , 'column'=> 'updated_at'])}}">Ultima modifica</a></th>
             <th scope="col">Azioni</th>
@@ -81,6 +82,14 @@
 
                     <td>
                         {{$project->type->name}}
+                    </td>
+
+                    <td>
+                        @forelse ($project->tecnologies as $tecnology )
+                        <span class="badge rounded-pill text-bg-info">{{$tecnology->name}}</span>
+                        @empty
+                            - no tag -
+                        @endforelse
                     </td>
 
                     <td>

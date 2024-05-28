@@ -6,6 +6,7 @@ use App\Functions\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use App\Models\Tecnology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -51,7 +52,8 @@ class ProjectController extends Controller
         $button='Crea progetto';
         $method= 'POST';
         $types = Type::all();
-        return view('admin.projects.create-edit', compact('title','route','project', 'button','method','types'));
+        $tecnologies = Tecnology::all();
+        return view('admin.projects.create-edit', compact('title','route','project', 'button','method','types','tecnologies'));
     }
 
     /**
@@ -109,7 +111,8 @@ class ProjectController extends Controller
         $button='Aggiorna progetto';
         $method= 'PUT';
         $types = Type::all();
-        return view('admin.projects.create-edit', compact('title','route','project', 'button','method','types'));
+        $tecnologies = Tecnology::all();
+        return view('admin.projects.create-edit', compact('title','route','project', 'button','method','types','tecnologies'));
     }
 
     /**

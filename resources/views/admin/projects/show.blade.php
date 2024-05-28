@@ -24,8 +24,23 @@
             <div class="col">
                       <h5 class="card-title mb-2  text-capitalize"><span class="fw-bold me-2">Nome:</span> {{$project->title}}</h5>
                       <p class="card-text text-capitalize"><span class="fw-bold me-2">Link:</span> {{$project->href}}</p>
+
+                      @if ($project->type)
+
                       <p class="card-text text-capitalize"><span class="fw-bold me-2">Tipo:</span> {{$project->type->id}} {{$project->type->name}}</p>
+                      @endif
+
+                      @if (count($project->tecnologies) > 0)
+
+                      <p class="card-text text-capitalize"><span class="fw-bold me-2">Tecnologie:</span>
+                        @foreach ($project->tecnologies as $tecnology)
+                        <span class="badge rounded-pill text-bg-info">{{$tecnology->name}}</span>
+                        @endforeach
+                     </p>
+                      @endif
+
                       <p class="card-text text-capitalize"><span class="fw-bold me-2">Ultima modifica:</span> {{Help::dateFormat($project->updated_at)}}</p>
+
                       <p class="card-text text-capitalize"><span class="fw-bold me-2">Descrizione:</span> {{$project->description}}</p>
 
                     <div class="d-flex mb-3">
