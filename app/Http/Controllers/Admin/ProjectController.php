@@ -63,6 +63,8 @@ class ProjectController extends Controller
     {
         $form_data = $request->all();
 
+
+
         // verifico l'esistenza della chiave 'image' in $form_data
         if(array_key_exists('image', $form_data)){
             // salvo l'immagine nello storage e ottengo il percorso
@@ -87,6 +89,11 @@ class ProjectController extends Controller
         $new_project->fill($form_data);
 
         $new_project->save();
+
+        if(array_key_exists('tecnologies', $form_data)){
+            $new_project->tecnologies()->attach($form_data['tecnologies']);
+
+        }
 
         return redirect()->route('admin.projects.index')->with('success', 'Il progetto è stato creato');
     }
@@ -148,6 +155,13 @@ class ProjectController extends Controller
             }
 
             $project->update($form_data);
+
+            if(array_key_exists('tecnologies', $form_data)){
+                $project->tecnologies()->sync($form_data['tecnologies']);
+            }else{
+                $project->tecnologies()->detach();
+            }
+
             return redirect()->route('admin.projects.index',$project)->with('update', 'Il progetto è stato aggiornato');
 
 

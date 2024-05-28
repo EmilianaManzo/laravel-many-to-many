@@ -9,8 +9,8 @@
 
                 <li>
                     <a href="{{route('admin.tecnologies.index')}}"> Tecnologie</a>
-
                 </li>
+
                 <li>
                     <a href="{{route('admin.types.index')}}"> Tipi</a>
                 </li>
