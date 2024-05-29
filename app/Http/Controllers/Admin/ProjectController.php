@@ -10,6 +10,7 @@ use App\Models\Tecnology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\type;
 
@@ -21,11 +22,13 @@ class ProjectController extends Controller
     public function index()
     {
         if(isset($_GET['toSearch'])){
-            $projects = Project::where('title', 'LIKE', '%' . $_GET['toSearch'] . '%')->paginate(15);
-            $count_search = Project::where('title', 'LIKE', '%' . $_GET['toSearch'] . '%')->count();
+            $projects = Project::where('title', 'LIKE', '%' . $_GET['toSearch'] . '%')
+                                ->where('user_id', Auth::id())->paginate(15);
+            $count_search = Project::where('title', 'LIKE', '%' . $_GET['toSearch'] . '%')
+                                    ->where('user_id', Auth::id())->count();
         }else{
 
-            $projects = Project::orderBy('id')->paginate(15);
+            $projects = Project::where('user_id', Auth::id())->orderBy('id')->paginate(15);
             $count_search = Project::count();
         }
 
@@ -36,8 +39,8 @@ class ProjectController extends Controller
 
     public function orderBy($direction , $column){
         $direction =  $direction === 'desc' ? 'asc' : 'desc' ;
-        $projects = Project::orderBy($column, $direction)->paginate(15);
-        $count_search = Project::count();
+        $projects = Project::where('user_id', Auth::id())->orderBy($column, $direction)->paginate(15);
+        $count_search = Project::where('user_id', Auth::id())->count();
         return view('admin.projects.index', compact('projects','count_search','direction'));
     }
 
@@ -62,7 +65,7 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
         $form_data = $request->all();
-
+        $form_data['user_id'] = Auth::id();
 
 
         // verifico l'esistenza della chiave 'image' in $form_data
@@ -112,6 +115,9 @@ class ProjectController extends Controller
      */
     public function edit( Project $project)
     {
+        if(Auth::id() !== $project->user_id){
+            abort('404');
+        }
 
         $title='Modifica progetto';
         $route=route('admin.projects.update', $project);

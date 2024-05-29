@@ -8,6 +8,7 @@ use Faker\Generator as Faker;
 use App\Functions\Helper as Helpy;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\User;
 
 class ProjectsTableSeeder extends Seeder
 {
@@ -19,6 +20,8 @@ class ProjectsTableSeeder extends Seeder
     {
         for ($i=0; $i < 60 ; $i++) {
             $new_project = new Project();
+
+            $new_project->user_id = User::inRandomOrder()->first()->id;
 
             // va inserita qui perchè nel migration l'abbiamo inserita dopo l'id
             // associamo in modo random partendo dal primo l'id della tabella di types

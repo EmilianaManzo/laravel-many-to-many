@@ -17,6 +17,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
+
     protected $fillable = [
         'name',
         'email',

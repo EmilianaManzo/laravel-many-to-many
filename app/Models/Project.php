@@ -12,6 +12,9 @@ class Project extends Model
     public function type(){
         return $this->belongsTo(Type::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
     public function tecnologies(){
         return $this->belongsToMany(Tecnology::class);
@@ -19,6 +22,7 @@ class Project extends Model
 
     protected $fillable = [
         'type_id',
+        'user_id',
         'title',
         'slug',
         'href',
